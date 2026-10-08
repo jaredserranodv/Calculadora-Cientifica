@@ -4,118 +4,118 @@ import kotlin.math.*
 
 /** Evalúa la misma expresión en portrait y landscape, sin depender de vistas Android. */
 object CalculatorEngine {
-    fun evaluate(expression: String): Double {
-        val parser = Parser(expression)
-        val result = parser.parse()
-        require(result.isFinite())
-        return result
+    fun evaluate(expresion: String): Double {
+        val analizador = Analizador(expresion)
+        val resultado = analizador.analizar()
+        require(resultado.isFinite())
+        return resultado
     }
 
-    private class Parser(private val input: String) {
-        private var index = 0
+    private class Analizador(private val entrada: String) {
+        private var posicion = 0
 
-        fun parse(): Double {
-            require(input.isNotBlank())
-            val value = expression()
-            require(index == input.length)
-            return value
+        fun analizar(): Double {
+            require(entrada.isNotBlank())
+            val valor = expresion()
+            require(posicion == entrada.length)
+            return valor
         }
 
-        private fun expression(): Double {
-            var value = term()
+        private fun expresion(): Double {
+            var valor = termino()
             while (true) {
-                value = when {
-                    take('+') -> value + term()
-                    take('−') || take('-') -> value - term()
-                    else -> return value
+                valor = when {
+                    tomar('+') -> valor + termino()
+                    tomar('−') || tomar('-') -> valor - termino()
+                    else -> return valor
                 }
             }
         }
 
-        private fun term(): Double {
-            var value = unary()
+        private fun termino(): Double {
+            var valor = unario()
             while (true) {
-                value = when {
-                    take('×') -> value * unary()
-                    take('÷') -> {
-                        val divisor = unary()
+                valor = when {
+                    tomar('×') -> valor * unario()
+                    tomar('÷') -> {
+                        val divisor = unario()
                         require(divisor != 0.0)
-                        value / divisor
+                        valor / divisor
                     }
-                    else -> return value
+                    else -> return valor
                 }
             }
         }
 
-        private fun unary(): Double = when {
-            take('+') -> unary()
-            take('−') || take('-') -> -unary()
-            else -> power()
+        private fun unario(): Double = when {
+            tomar('+') -> unario()
+            tomar('−') || tomar('-') -> -unario()
+            else -> potencia()
         }
 
-        private fun power(): Double {
-            val base = postfix()
-            return if (take('^')) base.pow(unary()) else base
+        private fun potencia(): Double {
+            val base = sufijo()
+            return if (tomar('^')) base.pow(unario()) else base
         }
 
-        private fun postfix(): Double {
-            var value = primary()
+        private fun sufijo(): Double {
+            var valor = primario()
             while (true) {
-                value = when {
-                    take('%') -> value / 100.0
-                    take('!') -> factorial(value)
-                    else -> return value
+                valor = when {
+                    tomar('%') -> valor / 100.0
+                    tomar('!') -> factorial(valor)
+                    else -> return valor
                 }
             }
         }
 
-        private fun primary(): Double {
-            if (take('(')) {
-                val value = expression()
-                require(take(')'))
-                return value
+        private fun primario(): Double {
+            if (tomar('(')) {
+                val valor = expresion()
+                require(tomar(')'))
+                return valor
             }
-            if (take('π')) return PI
-            if (take('e')) return E
-            val start = index
-            while (index < input.length && input[index].isLetter()) index++
-            if (index > start) {
-                val function = input.substring(start, index)
-                require(take('('))
-                val argument = expression()
-                require(take(')'))
-                return when (function) {
-                    "sin" -> sin(Math.toRadians(argument))
-                    "cos" -> cos(Math.toRadians(argument))
-                    "tan" -> tan(Math.toRadians(argument))
-                    "asin" -> Math.toDegrees(asin(argument))
-                    "acos" -> Math.toDegrees(acos(argument))
-                    "atan" -> Math.toDegrees(atan(argument))
-                    "sqrt" -> { require(argument >= 0); sqrt(argument) }
-                    "log" -> { require(argument > 0); log10(argument) }
-                    "ln" -> { require(argument > 0); ln(argument) }
-                    else -> throw IllegalArgumentException("Unknown function")
+            if (tomar('π')) return PI
+            if (tomar('e')) return E
+            val inicio = posicion
+            while (posicion < entrada.length && entrada[posicion].isLetter()) posicion++
+            if (posicion > inicio) {
+                val funcion = entrada.substring(inicio, posicion)
+                require(tomar('('))
+                val argumento = expresion()
+                require(tomar(')'))
+                return when (funcion) {
+                    "sin" -> sin(Math.toRadians(argumento))
+                    "cos" -> cos(Math.toRadians(argumento))
+                    "tan" -> tan(Math.toRadians(argumento))
+                    "asin" -> Math.toDegrees(asin(argumento))
+                    "acos" -> Math.toDegrees(acos(argumento))
+                    "atan" -> Math.toDegrees(atan(argumento))
+                    "sqrt" -> { require(argumento >= 0); sqrt(argumento) }
+                    "log" -> { require(argumento > 0); log10(argumento) }
+                    "ln" -> { require(argumento > 0); ln(argumento) }
+                    else -> throw IllegalArgumentException("Función desconocida")
                 }
             }
-            while (index < input.length && (input[index].isDigit() || input[index] == '.')) index++
-            require(index > start)
-            return input.substring(start, index).toDoubleOrNull()
-                ?: throw IllegalArgumentException("Invalid number")
+            while (posicion < entrada.length && (entrada[posicion].isDigit() || entrada[posicion] == '.')) posicion++
+            require(posicion > inicio)
+            return entrada.substring(inicio, posicion).toDoubleOrNull()
+                ?: throw IllegalArgumentException("Número inválido")
         }
 
-        private fun take(char: Char): Boolean {
-            if (index < input.length && input[index] == char) {
-                index++
+        private fun tomar(caracter: Char): Boolean {
+            if (posicion < entrada.length && entrada[posicion] == caracter) {
+                posicion++
                 return true
             }
             return false
         }
 
-        private fun factorial(value: Double): Double {
-            require(value >= 0 && value <= 170 && value == floor(value))
-            var result = 1.0
-            for (number in 2..value.toInt()) result *= number
-            return result
+        private fun factorial(valor: Double): Double {
+            require(valor >= 0 && valor <= 170 && valor == floor(valor))
+            var resultado = 1.0
+            for (numero in 2..valor.toInt()) resultado *= numero
+            return resultado
         }
     }
 }

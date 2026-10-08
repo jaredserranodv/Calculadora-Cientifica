@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="8dp">
 
-    <!-- ConstraintLayout: las filas y columnas forman chains con tamaños iguales. -->
+    <!-- Visor: ocupa todo el ancho arriba, igual que en portrait. -->
     <TextView
         android:id="@+id/display"
         android:layout_width="0dp"
@@ -22,389 +22,210 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/b0_0"
-        style="@style/CalculatorButton"
-        android:text="sin"
-        android:tag="sin("
-        android:onClick="onButtonClick"
+    <!-- Columna izquierda: funciones científicas, 3 columnas x 6 filas. -->
+    <LinearLayout
+        android:id="@+id/panelCientifico"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/b0_1"
+        app:layout_constraintEnd_toStartOf="@id/panelNumerico"
         app:layout_constraintTop_toBottomOf="@id/display"
-        app:layout_constraintBottom_toTopOf="@id/b1_0" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/b0_1"
-        style="@style/CalculatorButton"
-        android:text="cos"
-        android:tag="cos("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b0_0"
-        app:layout_constraintEnd_toStartOf="@id/b0_2"
-        app:layout_constraintTop_toTopOf="@id/b0_0"
-        app:layout_constraintBottom_toBottomOf="@id/b0_0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/b0_2"
-        style="@style/CalculatorButton"
-        android:text="tan"
-        android:tag="tan("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b0_1"
-        app:layout_constraintEnd_toStartOf="@id/b0_3"
-        app:layout_constraintTop_toTopOf="@id/b0_0"
-        app:layout_constraintBottom_toBottomOf="@id/b0_0" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="sin" android:tag="sin(" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="cos" android:tag="cos(" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="tan" android:tag="tan(" android:onClick="onButtonClick" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/b0_3"
-        style="@style/CalculatorButton"
-        android:text="sin⁻¹"
-        android:tag="asin("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b0_2"
-        app:layout_constraintEnd_toStartOf="@id/b0_4"
-        app:layout_constraintTop_toTopOf="@id/b0_0"
-        app:layout_constraintBottom_toBottomOf="@id/b0_0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/b0_4"
-        style="@style/CalculatorButton"
-        android:text="cos⁻¹"
-        android:tag="acos("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b0_3"
-        app:layout_constraintEnd_toStartOf="@id/b0_5"
-        app:layout_constraintTop_toTopOf="@id/b0_0"
-        app:layout_constraintBottom_toBottomOf="@id/b0_0" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="sin⁻¹" android:tag="asin(" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="cos⁻¹" android:tag="acos(" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="tan⁻¹" android:tag="atan(" android:onClick="onButtonClick" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/b0_5"
-        style="@style/CalculatorButton"
-        android:text="tan⁻¹"
-        android:tag="atan("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b0_4"
-        app:layout_constraintEnd_toStartOf="@id/b0_6"
-        app:layout_constraintTop_toTopOf="@id/b0_0"
-        app:layout_constraintBottom_toBottomOf="@id/b0_0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/b0_6"
-        style="@style/CalculatorButton"
-        android:text="√"
-        android:tag="sqrt("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b0_5"
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="√" android:tag="sqrt(" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="xʸ" android:tag="^" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="log" android:tag="log(" android:onClick="onButtonClick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="ln" android:tag="ln(" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="n!" android:tag="!" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="π" android:tag="π" android:onClick="onButtonClick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="e" android:tag="e" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="%" android:tag="%" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="(" android:tag="(" android:onClick="onButtonClick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text=")" android:tag=")" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="C" android:tag="C" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="⌫" android:tag="DEL" android:onClick="onButtonClick" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Columna derecha: teclado numérico y operadores básicos, 4 columnas x 4 filas. -->
+    <LinearLayout
+        android:id="@+id/panelNumerico"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/panelCientifico"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/b0_0"
-        app:layout_constraintBottom_toBottomOf="@id/b0_0" />
+        app:layout_constraintTop_toBottomOf="@id/display"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/b1_0"
-        style="@style/CalculatorButton"
-        android:text="xʸ"
-        android:tag="^"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/b1_1"
-        app:layout_constraintTop_toBottomOf="@id/b0_0"
-        app:layout_constraintBottom_toTopOf="@id/b2_0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/b1_1"
-        style="@style/CalculatorButton"
-        android:text="log"
-        android:tag="log("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b1_0"
-        app:layout_constraintEnd_toStartOf="@id/b1_2"
-        app:layout_constraintTop_toTopOf="@id/b1_0"
-        app:layout_constraintBottom_toBottomOf="@id/b1_0" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="7" android:tag="7" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="8" android:tag="8" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="9" android:tag="9" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="÷" android:tag="÷" android:onClick="onButtonClick" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/b1_2"
-        style="@style/CalculatorButton"
-        android:text="ln"
-        android:tag="ln("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b1_1"
-        app:layout_constraintEnd_toStartOf="@id/b1_3"
-        app:layout_constraintTop_toTopOf="@id/b1_0"
-        app:layout_constraintBottom_toBottomOf="@id/b1_0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/b1_3"
-        style="@style/CalculatorButton"
-        android:text="n!"
-        android:tag="!"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b1_2"
-        app:layout_constraintEnd_toStartOf="@id/b1_4"
-        app:layout_constraintTop_toTopOf="@id/b1_0"
-        app:layout_constraintBottom_toBottomOf="@id/b1_0" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="4" android:tag="4" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="5" android:tag="5" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="6" android:tag="6" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="×" android:tag="×" android:onClick="onButtonClick" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/b1_4"
-        style="@style/CalculatorButton"
-        android:text="π"
-        android:tag="π"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b1_3"
-        app:layout_constraintEnd_toStartOf="@id/b1_5"
-        app:layout_constraintTop_toTopOf="@id/b1_0"
-        app:layout_constraintBottom_toBottomOf="@id/b1_0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/b1_5"
-        style="@style/CalculatorButton"
-        android:text="e"
-        android:tag="e"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b1_4"
-        app:layout_constraintEnd_toStartOf="@id/b1_6"
-        app:layout_constraintTop_toTopOf="@id/b1_0"
-        app:layout_constraintBottom_toBottomOf="@id/b1_0" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="1" android:tag="1" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="2" android:tag="2" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="3" android:tag="3" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="−" android:tag="−" android:onClick="onButtonClick" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/b1_6"
-        style="@style/CalculatorButton"
-        android:text="%"
-        android:tag="%"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b1_5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/b1_0"
-        app:layout_constraintBottom_toBottomOf="@id/b1_0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/b2_0"
-        style="@style/CalculatorButton"
-        android:text="("
-        android:tag="("
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/b2_1"
-        app:layout_constraintTop_toBottomOf="@id/b1_0"
-        app:layout_constraintBottom_toTopOf="@id/b3_0" />
-
-    <Button
-        android:id="@+id/b2_1"
-        style="@style/CalculatorButton"
-        android:text=")"
-        android:tag=")"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b2_0"
-        app:layout_constraintEnd_toStartOf="@id/b2_2"
-        app:layout_constraintTop_toTopOf="@id/b2_0"
-        app:layout_constraintBottom_toBottomOf="@id/b2_0" />
-
-    <Button
-        android:id="@+id/b2_2"
-        style="@style/CalculatorButton"
-        android:text="C"
-        android:tag="C"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b2_1"
-        app:layout_constraintEnd_toStartOf="@id/b2_3"
-        app:layout_constraintTop_toTopOf="@id/b2_0"
-        app:layout_constraintBottom_toBottomOf="@id/b2_0" />
-
-    <Button
-        android:id="@+id/b2_3"
-        style="@style/CalculatorButton"
-        android:text="⌫"
-        android:tag="DEL"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b2_2"
-        app:layout_constraintEnd_toStartOf="@id/b2_4"
-        app:layout_constraintTop_toTopOf="@id/b2_0"
-        app:layout_constraintBottom_toBottomOf="@id/b2_0" />
-
-    <Button
-        android:id="@+id/b2_4"
-        style="@style/CalculatorButton"
-        android:text="÷"
-        android:tag="÷"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b2_3"
-        app:layout_constraintEnd_toStartOf="@id/b2_5"
-        app:layout_constraintTop_toTopOf="@id/b2_0"
-        app:layout_constraintBottom_toBottomOf="@id/b2_0" />
-
-    <Button
-        android:id="@+id/b2_5"
-        style="@style/CalculatorButton"
-        android:text="×"
-        android:tag="×"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b2_4"
-        app:layout_constraintEnd_toStartOf="@id/b2_6"
-        app:layout_constraintTop_toTopOf="@id/b2_0"
-        app:layout_constraintBottom_toBottomOf="@id/b2_0" />
-
-    <Button
-        android:id="@+id/b2_6"
-        style="@style/CalculatorButton"
-        android:text="−"
-        android:tag="−"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b2_5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/b2_0"
-        app:layout_constraintBottom_toBottomOf="@id/b2_0" />
-
-    <Button
-        android:id="@+id/b3_0"
-        style="@style/CalculatorButton"
-        android:text="7"
-        android:tag="7"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/b3_1"
-        app:layout_constraintTop_toBottomOf="@id/b2_0"
-        app:layout_constraintBottom_toTopOf="@id/b4_0" />
-
-    <Button
-        android:id="@+id/b3_1"
-        style="@style/CalculatorButton"
-        android:text="8"
-        android:tag="8"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b3_0"
-        app:layout_constraintEnd_toStartOf="@id/b3_2"
-        app:layout_constraintTop_toTopOf="@id/b3_0"
-        app:layout_constraintBottom_toBottomOf="@id/b3_0" />
-
-    <Button
-        android:id="@+id/b3_2"
-        style="@style/CalculatorButton"
-        android:text="9"
-        android:tag="9"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b3_1"
-        app:layout_constraintEnd_toStartOf="@id/b3_3"
-        app:layout_constraintTop_toTopOf="@id/b3_0"
-        app:layout_constraintBottom_toBottomOf="@id/b3_0" />
-
-    <Button
-        android:id="@+id/b3_3"
-        style="@style/CalculatorButton"
-        android:text="4"
-        android:tag="4"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b3_2"
-        app:layout_constraintEnd_toStartOf="@id/b3_4"
-        app:layout_constraintTop_toTopOf="@id/b3_0"
-        app:layout_constraintBottom_toBottomOf="@id/b3_0" />
-
-    <Button
-        android:id="@+id/b3_4"
-        style="@style/CalculatorButton"
-        android:text="5"
-        android:tag="5"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b3_3"
-        app:layout_constraintEnd_toStartOf="@id/b3_5"
-        app:layout_constraintTop_toTopOf="@id/b3_0"
-        app:layout_constraintBottom_toBottomOf="@id/b3_0" />
-
-    <Button
-        android:id="@+id/b3_5"
-        style="@style/CalculatorButton"
-        android:text="6"
-        android:tag="6"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b3_4"
-        app:layout_constraintEnd_toStartOf="@id/b3_6"
-        app:layout_constraintTop_toTopOf="@id/b3_0"
-        app:layout_constraintBottom_toBottomOf="@id/b3_0" />
-
-    <Button
-        android:id="@+id/b3_6"
-        style="@style/CalculatorButton"
-        android:text="+"
-        android:tag="+"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b3_5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/b3_0"
-        app:layout_constraintBottom_toBottomOf="@id/b3_0" />
-
-    <Button
-        android:id="@+id/b4_0"
-        style="@style/CalculatorButton"
-        android:text="1"
-        android:tag="1"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/b4_1"
-        app:layout_constraintTop_toBottomOf="@id/b3_0"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Button
-        android:id="@+id/b4_1"
-        style="@style/CalculatorButton"
-        android:text="2"
-        android:tag="2"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b4_0"
-        app:layout_constraintEnd_toStartOf="@id/b4_2"
-        app:layout_constraintTop_toTopOf="@id/b4_0"
-        app:layout_constraintBottom_toBottomOf="@id/b4_0" />
-
-    <Button
-        android:id="@+id/b4_2"
-        style="@style/CalculatorButton"
-        android:text="3"
-        android:tag="3"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b4_1"
-        app:layout_constraintEnd_toStartOf="@id/b4_3"
-        app:layout_constraintTop_toTopOf="@id/b4_0"
-        app:layout_constraintBottom_toBottomOf="@id/b4_0" />
-
-    <Button
-        android:id="@+id/b4_3"
-        style="@style/CalculatorButton"
-        android:text="0"
-        android:tag="0"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b4_2"
-        app:layout_constraintEnd_toStartOf="@id/b4_4"
-        app:layout_constraintTop_toTopOf="@id/b4_0"
-        app:layout_constraintBottom_toBottomOf="@id/b4_0" />
-
-    <Button
-        android:id="@+id/b4_4"
-        style="@style/CalculatorButton"
-        android:text="."
-        android:tag="."
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b4_3"
-        app:layout_constraintEnd_toStartOf="@id/b4_5"
-        app:layout_constraintTop_toTopOf="@id/b4_0"
-        app:layout_constraintBottom_toBottomOf="@id/b4_0" />
-
-    <Button
-        android:id="@+id/b4_5"
-        style="@style/CalculatorButton"
-        android:text="±"
-        android:tag="±"
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b4_4"
-        app:layout_constraintEnd_toStartOf="@id/b4_6"
-        app:layout_constraintTop_toTopOf="@id/b4_0"
-        app:layout_constraintBottom_toBottomOf="@id/b4_0" />
-
-    <Button
-        android:id="@+id/b4_6"
-        style="@style/CalculatorButton"
-        android:text="="
-        android:tag="="
-        android:onClick="onButtonClick"
-        app:layout_constraintStart_toEndOf="@id/b4_5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/b4_0"
-        app:layout_constraintBottom_toBottomOf="@id/b4_0" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="0" android:tag="0" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="." android:tag="." android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="=" android:tag="=" android:onClick="onButtonClick" />
+            <Button style="@style/CalculatorButton" android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="+" android:tag="+" android:onClick="onButtonClick" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
